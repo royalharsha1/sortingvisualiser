@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Sorting Algorithm Visualization</title>
+<style>    
+#container 
+{
+display: flex;
+justify-content: center;
+align-items: flex-end;
+height: 500px;
+}
+.bar
+{
+width: 20px;
+margin: 0 2px;
+background-color: #2196F3;
+}
+</style>
+</head>
+<body>
+<h1 style><center>Sorting Algorithm Visualization</center></h1>
+<h2>Name:k.sriharsha</h2>
+<h2>Email:k.sriharsha.19.me@gmail.com</h2>
+<div id="container"></div>
+<script>  
+function generateArray(size)
+{
+var array = [];
+for (var i = 0; i < size; i++) 
+{
+array.push(Math.floor(Math.random() * 100) + 1);
+}
+return array;
+}
+function createBars(array)
+{
+var container = document.getElementById('container');
+container.innerHTML = '';
+for (var i = 0; i < array.length; i++) 
+{
+var bar = document.createElement('div');
+bar.className = 'bar';
+bar.style.height = array[i] * 5 + 'px'; 
+container.appendChild(bar);
+}
+}
+async function bubbleSort(array) 
+{
+var len = array.length;
+var swapped;
+do
+{
+swapped = false;
+for (var i = 0; i < len - 1; i++) 
+{
+if (array[i] > array[i + 1])
+{
+var temp = array[i];
+array[i] = array[i + 1];
+array[i + 1] = temp;
+swapped = true;
+createBars(array); 
+await new Promise((resolve) => 
+setTimeout(resolve, 100));
+}
+}
+} while (swapped);
+return array;
+}
+async function startSort()
+{
+var size = parseInt(prompt('Enter the size of the array:'));
+var array = generateArray(size);
+createBars(array);
+await bubbleSort(array); 
+}
+startSort();
+</script>
+</body>
+</html>
